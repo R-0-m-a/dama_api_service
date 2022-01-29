@@ -1,0 +1,18 @@
+jwtSecret: testJavaDama2021secretEarringApplicationMilkaBelarussecretDeutschDublikateaDama2021secretEarringAppl
+
+logging:
+  level:
+    root: INFO
+
+spring:
+  data:
+    mongodb:
+      database: dama_db
+      port: 0
+      host: localhost
+
+mongock:
+  mongo-db:
+    write-concern:
+      journal: false
+    read-concern: local

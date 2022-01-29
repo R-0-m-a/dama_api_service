@@ -1,0 +1,15 @@
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        boot:
+          autoconfigure: info
+
+mongock:
+  change-logs-scan-package:
+    - com.dama.ohrringe.config.db.migrations
+server:
+  servlet:
+    context-path: /earringApi
+  port: 8080

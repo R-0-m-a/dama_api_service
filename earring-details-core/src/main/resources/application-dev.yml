@@ -1,0 +1,18 @@
+jwtSecret: ${JWT_SECRET}
+
+logging:
+  level:
+    root: info
+  file:
+    name: ${LOG_DIR}/dama-api.log
+
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration
+  data:
+    mongodb:
+      database: ${DB_NAME}
+      port: 27017
+      host: ${DB_HOST}
+      username: ${DB_USER_NAME}
+      password: ${DB_USER_PASSWORD}
