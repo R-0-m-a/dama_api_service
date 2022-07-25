@@ -18,6 +18,7 @@ public enum ApplicationErrorStatus {
   EARRING_DETAIL_CAN_NOT_DELETE(Status.CONFLICT, "Earring detail can not delete"),
   USER_ALREADY_EXIST(Status.CONFLICT, "%s with login %s has already existed in database"),
   USER_IS_NOT_AUTHENTICATED(Status.UNAUTHORIZED, "User is not authenticated"),
+  USER_NOT_FOUND(Status.NOT_FOUND, "User %s was not found in the database"),
   ENTITY_NOT_FOUND(Status.NOT_FOUND, "%s with id %s not found in database"),
   CRYSTAL_NOT_FOUND(Status.NOT_FOUND, "%s with identifier %s not found in server"),
   EMAIL_ALREADY_EXIST(Status.CONFLICT, "%s with email %s has already existed in database");

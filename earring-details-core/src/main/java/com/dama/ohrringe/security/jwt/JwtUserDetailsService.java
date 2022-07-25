@@ -3,32 +3,31 @@
  * All rights reserved.
  */
 
-package com.dama.ohrringe.security;
+package com.dama.ohrringe.security.jwt;
 
+import com.dama.ohrringe.common.exception.ApplicationErrorStatus;
+import com.dama.ohrringe.common.exception.ApplicationException;
 import com.dama.ohrringe.domain.User;
 import com.dama.ohrringe.repository.UserRepository;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 /** Authenticate a user from the database. */
 @Slf4j
+@AllArgsConstructor
 @Component("userDetailsService")
-public class DomainUserDetailsService implements UserDetailsService {
+public class JwtUserDetailsService implements UserDetailsService {
 
   private final UserRepository userRepository;
-
-  public DomainUserDetailsService(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
 
   @Override
   public UserDetails loadUserByUsername(final String login) {
@@ -40,8 +39,7 @@ public class DomainUserDetailsService implements UserDetailsService {
         .map(this::createSpringSecurityUser)
         .orElseThrow(
             () ->
-                new UsernameNotFoundException(
-                    "User " + lowercaseLogin + " was not found in the database"));
+                new ApplicationException(ApplicationErrorStatus.USER_NOT_FOUND, lowercaseLogin));
   }
 
   private org.springframework.security.core.userdetails.User createSpringSecurityUser(User user) {

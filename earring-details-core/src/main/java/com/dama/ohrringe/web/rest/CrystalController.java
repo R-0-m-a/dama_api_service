@@ -45,7 +45,7 @@ public class CrystalController implements CrystalApi {
           identifier);
       return ResponseEntity.ok(crystalRestDto);
     } else {
-      log.warn("Searching crystal by identifier {} was not found", identifier);
+      log.info("Searching crystal by identifier {} was not found", identifier);
       throw new ApplicationException(CRYSTAL_NOT_FOUND, "crystal", identifier);
     }
   }

@@ -19,8 +19,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,11 +29,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 /** The Token provider. */
+@Slf4j
 @Component
 public class TokenProvider {
 
   private static final String AUTHORITIES_KEY = "auth";
-  private final Logger log = LoggerFactory.getLogger(TokenProvider.class);
   private final Key key;
   private final JwtParser jwtParser;
 
@@ -63,7 +62,7 @@ public class TokenProvider {
             .map(GrantedAuthority::getAuthority)
             .collect(Collectors.joining(","));
     Date validity =
-        Date.from(LocalDate.now().plusDays(15).atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date.from(LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
 
     return Jwts.builder()
         .setSubject(authentication.getName())
